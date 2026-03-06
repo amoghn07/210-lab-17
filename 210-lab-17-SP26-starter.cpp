@@ -9,7 +9,7 @@ struct Node {
 };
 
 void output(Node *);
-void addNode(Node *, Node *, int);
+void addNode(Node *&, Node *, int);
 
 int main() {
     Node *head = nullptr;
@@ -21,18 +21,7 @@ int main() {
         Node *newVal = new Node;
         
         // adds node at head
-
         addNode(head, newVal, tmp_val);
-        /*if (!head) {
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else {
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        } */
     }
     output(head);
 
@@ -110,12 +99,12 @@ int main() {
     return 0;
 }
 
-void addNode(Node *hd, Node *nw, int val){
+void addNode(Node *&hd, Node *nw, int val){
     if (!hd) {
-            hd = nw;
-            nw->next = nullptr;
-            nw->value = val;
-        }
+        hd = nw;
+        nw->next = nullptr;
+        nw->value = val;
+    }
     else {
         nw->next = hd;
         nw->value = val;

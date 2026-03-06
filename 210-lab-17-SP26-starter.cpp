@@ -10,6 +10,7 @@ struct Node {
 
 void output(Node *);
 void addNode(Node *&, Node *, int);
+void deleteNode(Node *&, Node *, int);
 
 int main() {
     Node *head = nullptr;
@@ -35,6 +36,8 @@ int main() {
     // traverse that many times and delete that node
     Node *current = head;
     Node *prev = nullptr;  // start prev as nullptr to detect head deletion
+    deleteNode(current, prev, entry);
+
 
     for (int i = 0; i < (entry - 1); i++) {
         prev = current;
@@ -97,6 +100,30 @@ int main() {
     output(head);
 
     return 0;
+}
+
+void deleteNode(Node *& current, Node *prev, int entry){
+    // traverse that many times and delete that node
+    Node *current = head;
+    Node *prev = nullptr;  // start prev as nullptr to detect head deletion
+
+    for (int i = 0; i < (entry - 1); i++) {
+        prev = current;
+        current = current->next;
+    }
+
+    // at this point, delete current and reroute pointers
+    if (current) {
+        if (prev == nullptr) {
+            // deleting the head node
+            head = current->next;
+        } 
+        else {
+            prev->next = current->next;
+        }
+
+        delete current;
+    }
 }
 
 void addNode(Node *&hd, Node *nw, int val){

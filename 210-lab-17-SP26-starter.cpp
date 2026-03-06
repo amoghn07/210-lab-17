@@ -12,6 +12,7 @@ void output(Node *);
 void addNode(Node *&, Node *, int);
 void deleteNode(Node*&, Node *&, Node *, int);
 void insertNode(Node*&, Node *&, Node *&, int);
+void deleteList(Node *&, Node *&);
 
 int main() {
     Node *head = nullptr;
@@ -52,36 +53,10 @@ int main() {
     cin >> entry;
 
     insertNode(head, current, prev, entry);
-    /*current = head;
-    prev = nullptr;  // reset prev to nullptr for same reason
-
-    for (int i = 0; i < entry; i++) {
-        prev = current;
-        current = current->next;
-    }
-
-    // at this point, insert a node between prev and current
-    Node *newnode = new Node;
-    newnode->value = 10000;
-    newnode->next = current;
-
-    if (prev == nullptr) {
-        // inserting before the head
-        head = newnode;
-    } else {
-        prev->next = newnode;
-    }*/
     output(head);
 
     // deleting the linked list
-    current = head;
-    while (current) {
-        head = current->next;
-        delete current;
-        current = head;
-    }
-    head = nullptr;
-    output(head);
+    deleteList(head, current);
 
     return 0;
 }
@@ -106,6 +81,17 @@ void insertNode(Node*& head, Node *& current, Node *& prev, int entry){
     } else {
         prev->next = newnode;
     }
+}
+
+void deleteList(Node *& head, Node *& current){
+    current = head;
+    while (current) {
+        head = current->next;
+        delete current;
+        current = head;
+    }
+    head = nullptr;
+    output(head);
 }
 
 void deleteNode(Node *& head, Node *& current, Node *prev, int entry){
